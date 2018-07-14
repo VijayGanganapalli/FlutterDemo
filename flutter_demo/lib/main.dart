@@ -38,12 +38,6 @@ class _HomePageState extends State<HomePage> {
           style: TextStyle(color: Colors.white),
       ),
           ),
-      body: SnackBarPage(),
-    );
-  }
-}
-
-class SnackBarPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
