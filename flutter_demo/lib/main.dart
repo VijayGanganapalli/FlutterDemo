@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
-  final appName = 'Custom Themes';
+  final appName = 'SnackBars Demo';
 
   @override
   Widget build(BuildContext context) {
@@ -11,10 +11,7 @@ class MyApp extends StatelessWidget {
       title: appName,
       debugShowCheckedModeBanner: true,
       theme: ThemeData(
-        brightness: Brightness.dark,
-        primaryColor: Colors.lightGreen[800],
-        accentColor: Colors.lightGreenAccent[700],
-      ),
+          primaryColor: Colors.amber[800], accentColor: Colors.amberAccent),
       home: HomePage(
         title: appName,
       ),
@@ -36,23 +33,34 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title),
+        title: Text(
+          widget.title,
+          style: TextStyle(color: Colors.white),
       ),
-      body: Center(
-        child: Container(
-          color: Theme.of(context).accentColor,
-          child: Text(
-            'Text with a background color',
-            style: Theme.of(context).textTheme.title,
           ),
+      body: SnackBarPage(),
+    );
+  }
+}
+
+class SnackBarPage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: RaisedButton(
+        child: Text('Show SnackBar'),
+        onPressed: (){
+          final snackBar = SnackBar(
+            content: Text('Yay!, A snackBar!'),
+            action: SnackBarAction(
+              label: 'UNDO',
+              onPressed: (){
+                //write your action
+              },
         ),
-      ),
-      floatingActionButton: Theme(
-        data: Theme.of(context).copyWith(accentColor: Colors.lightGreenAccent),
-        child: FloatingActionButton(
-          onPressed: null,
-          child: Icon(Icons.add),
-        ),
+          );
+          Scaffold.of(context).showSnackBar(snackBar);
+        },
       ),
     );
   }
