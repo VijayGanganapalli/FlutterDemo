@@ -1,61 +1,44 @@
 import 'package:flutter/material.dart';
 
-void main() => runApp(MyApp());
+void main() => runApp(SnackBarDemo());
 
-class MyApp extends StatelessWidget {
-  final appName = 'SnackBars Demo';
-
+class SnackBarDemo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: appName,
-      debugShowCheckedModeBanner: true,
-      theme: ThemeData(
-          primaryColor: Colors.amber[800], accentColor: Colors.amberAccent),
-      home: HomePage(
-        title: appName,
+      title: 'SnackBar Demo',
+      home: Scaffold(
+        appBar: AppBar(
+          title: Text('SnackBar Demo'),
+        ),
+        body: SnackBarPage(),
       ),
     );
   }
 }
 
-class HomePage extends StatefulWidget {
-  final String title;
-
-  HomePage({Key key, this.title}) : super(key: key);
-
-  @override
-  _HomePageState createState() => _HomePageState();
-}
-
-class _HomePageState extends State<HomePage> {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          widget.title,
-          style: TextStyle(color: Colors.white),
-      ),
-          ),
+class SnackBarPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
       child: RaisedButton(
-        child: Text('Show SnackBar'),
-        onPressed: (){
+        onPressed: () {
           final snackBar = SnackBar(
-            content: Text('Yay!, A snackBar!'),
+            content: Text('Yay! A SnackBar!'),
             action: SnackBarAction(
-              label: 'UNDO',
-              onPressed: (){
-                //write your action
+              label: 'Undo',
+              onPressed: () {
+                // Some code to undo the change!
               },
-        ),
+            ),
           );
+
+          // Find the Scaffold in the Widget tree and use it to show a SnackBar!
           Scaffold.of(context).showSnackBar(snackBar);
         },
+        child: Text('Show SnackBar'),
       ),
     );
   }
 }
+
